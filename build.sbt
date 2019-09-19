@@ -14,12 +14,12 @@ lazy val scalaSettings = Seq(
 )
 
 lazy val root = Project(id = unrar, base = file("."))
-  .dependsOn(unrar_dec_supported)
+  .dependsOn(unrar_dec_support)
   .settings(scalaSettings,
     aggregate in update := false
   )
 
-lazy val unrar_dec_supported = project.settings(scalaSettings)
+lazy val unrar_dec_support = project.settings(scalaSettings)
 
 offline := true
 
