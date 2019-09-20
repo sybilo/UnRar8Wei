@@ -20,7 +20,10 @@ import com.test.implicts.{CryptoBytes, CryptoString}
 import de.innosystec.unrar.Archive
 import java.io.ByteArrayOutputStream
 import java.nio.ByteBuffer
+import java.nio.charset.Charset
 import java.util.regex.Pattern
+
+import scala.collection.convert.WrapAsScala.mapAsScalaMap
 
 /**
  * @author Chenai Nakam(chenai.nakam@gmail.com)
@@ -94,11 +97,11 @@ object ShuZi8Wei extends App {
     outBytes.map { x => String.format("%08d", Integer.valueOf(x.toBinaryString.takeRight(8))) }.zipWithIndex.mkString(" ")
   }
 
-  //  for (c <- Charset.availableCharsets().toMap) {
-  //      println {
-  //        c._1 + ": " + new String(outBytes, c._2)
-  //      }
-  //  }
+    for (c <- Charset.availableCharsets().toMap) {
+        println {
+          c._1 + ": " + new String(outBytes, c._2)
+        }
+    }
 
   println(s"existZH: ${existZH(outBytes)}")
 
