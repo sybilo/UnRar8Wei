@@ -91,21 +91,35 @@ object ShuZi8Wei extends App {
 
   println(outBytes.toHex)
 
-  //  println(new String(outBytes))
-
   println {
     outBytes.map { x => String.format("%08d", Integer.valueOf(x.toBinaryString.takeRight(8))) }.zipWithIndex.mkString(" ")
   }
 
-    for (c <- Charset.availableCharsets().toMap) {
-        println {
-          c._1 + ": " + new String(outBytes, c._2)
-        }
+  for (c <- Charset.availableCharsets().toMap) {
+    println {
+      c._1 + ": " + new String(outBytes, c._2)
     }
+  }
 
   println(s"existZH: ${existZH(outBytes)}")
 
-  println(new String(outBytes))
+  // “疫苗之王”。etherscan 上居然用 “view as utf-8” 看不了了。
+  // https://etherscan.io/tx/0x4e18a55ba9f295774723e621a1e7599a2cb1be84170b9d3b9f0cb02f8d799005
+  println {
+    new String(("e4b880e7af87e2809ce796abe88b97e4b98be78e8be2809de588b7e4ba86e5b18fefbc9a200a31e3808120e69bbee7bb8fe59ba0e4b8bae4b889e9b9bfe" +
+      "5a5b6e7b289e8a2abe5a484e79086e79a84e5ad99e592b8e6b3bde58d87e4bbbbe4b8bae59bbde5aeb6e9a39fe59381e88dafe59381e79b91e79da3e7aea1e79086e5b1" +
+      "80e589afe5b180e995bfefbc8ce88dafe59381e5ae89e585a8e680bbe79b91efbc8ce680bbe7aea1e796abe88b97e38082e784b6e8808cefbc8ce4b889e8819ae6b0b0e" +
+      "883bae6a188e78886e69699e4babae8928be58dabe99481e98187e8a2ade8baabe4baa1e38082200a32e3808120e5bd93e5b9b4efbc8ce69b9de58589e5b1b1e8a5bfe7" +
+      "96abe88b97e4ba8be4bbb6e5908eefbc8ce8aeb0e88085e78e8be5858be58ba4e69c80e7bb88e7a6bbe5bc80e8aeb0e88085e8bf99e4b8aae8818ce4b89aefbc8ce4b8b" +
+      "be7bc96e58c85e69c88e998b3e8b083e7a6bbe3808a3231e4b896e7baaae7bb8fe6b58ee68aa5e98193e3808be38082e7adbee58f91e78e8be5858be58ba4e79a84e8bf" +
+      "99e7af87e7a8bfe5ad90e697b6efbc8ce58c85e69c88e998b3e5b7b2e98187e8a781e4ba86e58fafe883bde79a84e7bb93e69e9ce38082e4bb96e8afb4efbc8ce4b88de" +
+      "7adbeefbc8ce5afb9e4b88de8b5b7e5ada9e5ad90e38082200a33e3808120e7be8ee59bbde5bcbae7949fe797b1e5ad90e7b289e887b4e7998ce588a4e5bcbae7949fe8" +
+      "b594e581bf3232e5908de58f97e5aeb3e88085200a3437e4babfe7be8ee98791efbc9be68891e4bbace58187e796abe88b97e68993e585a53235e4b887e5908de584bfe" +
+      "7aba5e4bd93e58685efbc8ce6b2a1e694b6313836e694afefbc8ce7bd9ae6acbe333030e4b887e380820ac2a0e6ada4e588bbe68891e4bbace883bde5819ae79a84e58f" +
+      "afe883bde4b88de5a49aefbc8ce7949ae887b3e6b2a1e595a5e794a8efbc8ce4bd86e698afe5b88ce69c9be4bda0e883bde5a49fe585b3e6b3a8e8bf99e4bbb6e4ba8be" +
+      "fbc8ce58f91e58f91e69c8be58f8be59c88efbc8ce8a2abe5928ce8b090e4ba86efbc8ce5868de58f91e58f91e8af95e8af95efbc8ce4b88de8a681e7ad89e588b0e4ba" +
+      "8be68385e588b0e4ba86e4bda0e5a4b4e4b88aefbc8ce6b2a1e4babae7ab99e587bae69da5e4b8bae4bda0e8afb4e8af9de4ba86e38082").decodeHex, "utf-8")
+  }
 
 
   //  val rawpsw = new Array[Byte](2 * pwd.length + 8)
